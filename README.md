@@ -1,6 +1,6 @@
 # 🎙️ Audio Transcriber
 
-**Audio Transcriber** is a Python script that transcribes **audio and video files** into text using OpenAI's transcription models. Specifically designed for **Brazilian Portuguese** content, it automatically infers speakers from context and formats the transcription appropriately. Perfect for any audio/video content that needs accurate transcription! 📄
+**Audio Transcriber** is a Python script that transcribes **audio and video files** into text using OpenAI's transcription models. Specifically designed for **Brazilian Portuguese** content, it automatically infers speakers from context and formats the transcription appropriately. Perfect for any audio/video content! 📄
 
 # 🚀 Main Features
 
