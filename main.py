@@ -7,7 +7,7 @@ import uuid
 from pathlib import Path
 
 from dotenv import find_dotenv, load_dotenv
-from openai import OpenAI
+from groq import Groq
 
 _ = load_dotenv(find_dotenv())
 
@@ -16,51 +16,50 @@ DOCS_DIR = Path(__file__).parent / "docs"
 DOCS_DIR.mkdir(exist_ok=True)
 
 
-CLIENT = OpenAI()
-PROMPT = """Transcribe the provided audio or video file. Identify the speakers from contextual cues and format their speeches accordingly. Ensure accurate transcription and proper formatting. The transcription must be in Brazilian Portuguese only. Do not include any commentary or explanations. Just provide the transcription in a clean and readable format."""
+CLIENT = Groq()
+PROMPT = """Transcribe the provided audio or video file. The transcription must be in **BRAZILIAN PORTUGUESE ONLY**. Never include any commentary or explanations. Just provide the transcription in a clean and readable format."""
 
 
 def get_source_path():
-    print("Welcome to the Audio Transcriber! 🎙️")
+    print("Bem-vindo ao Audio Transcriber! 🎙️")
     time.sleep(1)
 
-    source_path = input("Provide the path to the file: 📁\n")
+    source_path = input("Forneça o caminho ao arquivo: 📁\n")
     return source_path
 
 
 def transcribe_audio(source_path):
-    print("Transcribing your file... Please wait! ⏳")
+    print("Transcrevendo arquivo... Por favor, aguarde! ⏳")
     doc_dir = DOCS_DIR / f"{uuid.uuid4()}.md"
 
     try:
         with open(source_path, "rb") as input_file:
             transcript = CLIENT.audio.transcriptions.create(
+                model="whisper-large-v3",
                 file=input_file,
-                model="gpt-4o-transcribe",
-                chunking_strategy="auto",
                 language="pt",
                 prompt=PROMPT,
                 response_format="text",
-                temperature=0.2,
+                temperature=0,
                 timeout=None,
             )
 
         with open(doc_dir, "w", encoding="utf-8") as output_file:
             output_file.write(transcript)
-            print("Success! Your file has been transcribed! 🚀")
-            print(f"Saved as: {doc_dir.name}")
+            print("Successo! Seu arquivo foi transcrito! 🚀")
+            print(f"Salvo como: {doc_dir.name}")
 
     except FileNotFoundError:
-        print("Error: The provided path wasn't found! 📁")
-        print("Please check the path and try again! 🛠️")
+        print("Erro: Arquivo não encontrado! 📁")
+        print("Por favor, tente novamente! 🛠️")
 
-    except TimeoutError:
-        print("Error: The transcription request timed out! ⏰")
-        print("Please check your connection and try again! 🌐")
+    except KeyboardInterrupt:
+        print("Processo interrompido! ❌")
+        print("Saindo... 👋")
 
     except Exception as e:
-        print("Error! An unexpected error occurred! ❌")
-        print(f"Details: {e}")
+        print("Erro! Ocorreu um erro inesperado! ☠️")
+        print(f"Detalhes: {e}")
 
 
 def main():
