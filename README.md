@@ -14,6 +14,7 @@
 
 - **Python 3.12+**, available through the [**official website**](https://www.python.org/downloads/).
 - **OpenAI API Key**, obtainable from the [**OpenAI platform**](https://platform.openai.com/login).
+- `.env` file with the **`OPENAI_API_KEY` variable** configured.
 
 # 🛠️ Local Installation
 
@@ -40,4 +41,4 @@ python3 main.py
 
 # 📜 Free Software
 
-Distributed under the [**GNU GPL v3**](LICENSE), ensuring freedom - as in "free speech" - to use, modify, and redistribute the software, as long as these freedoms are preserved in any derivative versions. By using or contributing, you support the **free software** philosophy and help build an open, community-driven technological environment! ✊
+Distributed under the [**GNU GPL v3**](LICENSE), ensuring freedom to use, modify, and redistribute the software, as long as these freedoms are preserved in any derivative versions. By using or contributing, you support the **free software** philosophy and help build an open, community-driven technological environment! ✊
