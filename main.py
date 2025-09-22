@@ -17,7 +17,6 @@ DOCS_DIR.mkdir(exist_ok=True)
 
 
 CLIENT = Groq()
-PROMPT = """Transcribe the provided audio or video file. The transcription must be in **BRAZILIAN PORTUGUESE ONLY**. Never include any commentary or explanations. Just provide the transcription in a clean and readable format."""
 
 
 def get_source_path():
@@ -38,9 +37,8 @@ def transcribe_audio(source_path):
                 model="whisper-large-v3",
                 file=input_file,
                 language="pt",
-                prompt=PROMPT,
                 response_format="text",
-                temperature=0,
+                temperature=0.2,
                 timeout=None,
             )
 
